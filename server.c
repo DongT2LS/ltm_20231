@@ -33,7 +33,7 @@ void *handle_client(void *socket_fd) {
 
     // Receive data from client
     while ((read_size = recv(client_socket, buffer, sizeof(buffer), 0)) > 0) {
-        int status = atoi(buffer[0]);
+        int status = 1;
         switch(status){
             case 0 :
                 exit(0);
