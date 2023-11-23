@@ -50,7 +50,7 @@ int main(int argc,char *argv[]) {
         //     break;
         // }
 
-        printf("Server response %s : %s\n",argv[1], message);
+        printf("Server response : OKE\n");
         memset(message, 0, sizeof(message));
         // usleep(20000);
     // }
