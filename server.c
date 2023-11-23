@@ -6,6 +6,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <pthread.h>
+#include "authentication.h"
+
 
 #define MAX_CLIENTS 5
 
@@ -15,16 +17,6 @@ enum handle {
     LOGOUT = 2,
 };
 
-
-void login(int client_socket){
-    send(client_socket,"Login success !",16,0);
-    printf("Login");
-}
-
-void logout(int client_socket){
-    send(client_socket,"Logout !",9,0);
-    printf("Logout");
-}
 
 void *handle_client(void *socket_fd) {
     int client_socket = *((int *)socket_fd);
@@ -65,7 +57,6 @@ int main(int argc,char *argv[]) {
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
     pthread_t thread_id;
-
     // Create socket
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket == -1) {

@@ -37,7 +37,7 @@ int main(int argc,char *argv[]) {
     printf("Connected to server\n");
 
     // Send and receive messages
-    while (1) {
+    // while (1) {
         // printf("Enter message: ");
         // fgets(message, sizeof(message), stdin);
 
@@ -45,15 +45,15 @@ int main(int argc,char *argv[]) {
         send(client_socket, "1ello", 6, 0);
 
         // Receive the server's response
-        if (recv(client_socket, message, sizeof(message), 0) == 0) {
-            printf("Server disconnected\n");
-            break;
-        }
+        // if (recv(client_socket, message, sizeof(message), 0) == 0) {
+        //     printf("Server disconnected\n");
+        //     break;
+        // }
 
         printf("Server response %s : %s\n",argv[1], message);
         memset(message, 0, sizeof(message));
-        usleep(20000);
-    }
+        // usleep(20000);
+    // }
 
     close(client_socket);
 
