@@ -6,10 +6,10 @@
 
 void login(int client_socket){
     // send(client_socket,"Login success !",16,0);
-    printf("Login");
+    // printf("Login\n");
 }
 
 void logout(int client_socket){
     // send(client_socket,"Logout !",9,0);
-    printf("Logout");
+    // printf("Logout\n");
 }

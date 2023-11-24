@@ -7,14 +7,22 @@
 #include <netinet/in.h>
 #include <pthread.h>
 #include "authentication.h"
-
+#include "game.h"
 
 #define MAX_CLIENTS 5
 
 enum handle {
-    EXIT = 0,
+    SIGNUP = 0,
     LOGIN = 1, 
     LOGOUT = 2,
+    NEW_ROOM = 3,
+    JOIN = 4,
+    INVITE = 5,
+    LEAVE = 6,
+    CHOOSE = 7,
+    CHAT = 8,
+    READY = 9,
+    START = 10
 };
 
 
@@ -25,16 +33,40 @@ void *handle_client(void *socket_fd) {
 
     // Receive data from client
     while ((read_size = recv(client_socket, buffer, sizeof(buffer), 0)) > 0) {
-        int status = 1;
+        int status = 6;
         switch(status){
             case 0 :
-                exit(0);
+                leave();
                 break;
             case 1 :
                 login(client_socket);
                 break;
             case 2 :
                 logout(client_socket);
+                break;
+            case 3 :
+                newroom();
+                break;
+            case 4 :  
+                join();
+                break;
+            case 5 :
+                invite();
+                break;
+            case 6 :
+                leave();
+                break;
+            case 7 :
+                choose();
+                break;
+            case 8 :
+                chat();
+                break;
+            case 9 :
+                ready();
+                break;
+            case 10 :
+                start();
                 break;
         }   
     }
@@ -98,7 +130,7 @@ int main(int argc,char *argv[]) {
             perror("Could not create thread");
             return 1;
         }
-
+        
         // Detach the thread to allow it to run independently
         pthread_detach(thread_id);
     }

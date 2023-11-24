@@ -1,7 +1,7 @@
 all: server client
 
-server: server.c authentication.c
-	gcc -o server authentication.c server.c -pthread
+server: server.c authentication.c game.c
+	gcc -o server authentication.c server.c game.c -pthread
 
 client: client.c
 	gcc client.c -o client 

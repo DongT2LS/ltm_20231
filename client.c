@@ -52,7 +52,7 @@ int main(int argc,char *argv[]) {
 
         printf("Server response : OKE\n");
         memset(message, 0, sizeof(message));
-        // usleep(20000);
+        usleep(200000);
     // }
 
     close(client_socket);
