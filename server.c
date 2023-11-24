@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include "authentication.h"
+#include "authentication/authentication.h"
 #include "game.h"
 
 #define MAX_CLIENTS 5
@@ -25,15 +25,15 @@ enum handle {
     START = 10
 };
 
-
+// Xử lý request từ client 
 void *handle_client(void *socket_fd) {
     int client_socket = *((int *)socket_fd);
     char buffer[1024];
     int read_size;
 
-    // Receive data from client
+    // Xử lý các luồng cho các loại message 
     while ((read_size = recv(client_socket, buffer, sizeof(buffer), 0)) > 0) {
-        int status = 6;
+        int status = 1;
         switch(status){
             case 0 :
                 leave();
@@ -119,19 +119,19 @@ int main(int argc,char *argv[]) {
             perror("Accept failed");
             return 1;
         }
-
         printf("Connection accepted: %d\n", client_socket);
 
-        // Create a new thread to handle the client
+        // Tạo luồng mới để xử lý cho từng client
         int *new_socket = malloc(1);
         *new_socket = client_socket;
 
+        // Tạo luồng mới
         if (pthread_create(&thread_id, NULL, handle_client, (void *)new_socket) < 0) {
             perror("Could not create thread");
             return 1;
         }
         
-        // Detach the thread to allow it to run independently
+        // Tách luồng để xử lý riêng biệt
         pthread_detach(thread_id);
     }
 
