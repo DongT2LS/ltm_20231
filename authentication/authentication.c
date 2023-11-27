@@ -8,7 +8,7 @@ void login(int client_socket,char *buffer){
     char *argv[3];
     int *argc;
     
-    loginnedAccounts = addAccount(loginnedAccounts,username,password,id);
+    // loginnedAccounts = addAccount(loginnedAccounts,username,password,id);
 
 }
 
