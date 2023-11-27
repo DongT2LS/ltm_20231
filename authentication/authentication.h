@@ -1,8 +1,8 @@
-#ifndef AUTHENTICATION_H  // Đảm bảo rằng file2.h không bao gồm nhiều lần
+#ifndef AUTHENTICATION_H 
 #define AUTHENTICATION_H
 
-
-void login(int client_socket);
-void logout(int client_socket);
+struct Account *loginnedAccounts;
+void login(int client_socket,char *buffer);
+void logout(int client_socket,char *id);
 
 #endif

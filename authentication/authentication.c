@@ -2,14 +2,16 @@
 #include <sys/socket.h>
 #include <stdio.h>
 #include "authentication.h"
+#include "../model/account.h"
 
+void login(int client_socket,char *buffer){
+    char *argv[3];
+    int *argc;
+    
+    loginnedAccounts = addAccount(loginnedAccounts,username,password,id);
 
-void login(int client_socket){
-    // send(client_socket,"Login success !",16,0);
-    printf("Login\n");
 }
 
-void logout(int client_socket){
-    // send(client_socket,"Logout !",9,0);
-    printf("Logout\n");
+void logout(int client_socket,char *id){
+    removeAccount(&loginnedAccounts,id);
 }

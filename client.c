@@ -37,12 +37,12 @@ int main(int argc,char *argv[]) {
     printf("Connected to server\n");
 
     // Send and receive messages
-    // while (1) {
+    while (1) {
         // printf("Enter message: ");
         // fgets(message, sizeof(message), stdin);
 
         // Send the message to the server
-        send(client_socket, "1ello", 6, 0);
+        send(client_socket, "123 ello", 6, 0);
 
         // Receive the server's response
         // if (recv(client_socket, message, sizeof(message), 0) == 0) {
@@ -53,7 +53,7 @@ int main(int argc,char *argv[]) {
         printf("Server response : OKE\n");
         memset(message, 0, sizeof(message));
         usleep(200000);
-    // }
+    }
 
     close(client_socket);
 
