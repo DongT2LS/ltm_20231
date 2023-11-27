@@ -3,6 +3,6 @@
 
 struct Account *loginnedAccounts;
 void login(int client_socket,char *buffer);
-void logout(int client_socket,char *id);
+void logout(int client_socket,char *buffer);
 
 #endif

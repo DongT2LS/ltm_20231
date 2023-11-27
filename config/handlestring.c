@@ -1,6 +1,7 @@
 #include "config.h"
 #include <string.h>
 #include <stdlib.h>
+
 // Hàm tách chuỗi
 extern void splitString(char input[], char *result[], int *resultSize) {
     char *token = strtok(input, " "); // Tách chuỗi bằng khoảng trắng

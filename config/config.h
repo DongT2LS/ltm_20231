@@ -3,4 +3,4 @@
 
 void splitString(char input[], char *result[], int *resultSize);
 
-#endif CONFIG_H
+#endif

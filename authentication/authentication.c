@@ -18,6 +18,14 @@ void login(int client_socket,char *buffer){
     // printf("%s",argv[1]);
 }
 
-void logout(int client_socket,char *id){
-    removeAccount(&loginnedAccounts,id);
+void logout(int client_socket,char *buffer){
+    char *argv[3];
+    int argc;
+    splitString(buffer,argv,&argc);
+    if(argc!=2){
+        printf("Thieu tham so truyen vao !\n");
+        return;
+    }
+    removeAccount(&loginnedAccounts,argv[1]);
+    printf("Logout %s\n",argv[1]);
 }

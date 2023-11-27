@@ -42,7 +42,7 @@ int main(int argc,char *argv[]) {
         // fgets(message, sizeof(message), stdin);
 
         // Send the message to the server
-        send(client_socket, "1 ello abc 123", 15, 0);
+        send(client_socket, "2 123", 15, 0);
 
         // Receive the server's response
         // if (recv(client_socket, message, sizeof(message), 0) == 0) {

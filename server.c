@@ -58,7 +58,7 @@ void *handle_client(void *socket_fd) {
                 login(client_socket,buffer);
                 break;
             case 2 :
-                // logout(client_socket);
+                logout(client_socket,buffer);
                 break;
             case 3 :
                 newroom();
