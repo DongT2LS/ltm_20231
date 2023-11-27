@@ -30,21 +30,6 @@ extern struct Account *loginnedAccounts;
 //     START = 10
 // };
 
- 
-// Hàm tách chuỗi
-extern void splitString(char input[], char *result[], int *resultSize) {
-    char *token = strtok(input, " "); // Tách chuỗi bằng khoảng trắng
-    *resultSize = 0;
-
-    // Lặp để tách và lưu vào mảng result
-    while (token != NULL) {
-        result[*resultSize] = (char *)malloc(strlen(token) + 1); // Cấp phát bộ nhớ cho mỗi chuỗi
-        strcpy(result[*resultSize], token); // Sao chép chuỗi vào mảng result
-        (*resultSize)++;
-        token = strtok(NULL, " ");
-    }
-}
-
 
 // Xử lý request từ client
 void *handle_client(void *socket_fd) {
@@ -62,7 +47,7 @@ void *handle_client(void *socket_fd) {
         char *statusCode;
         strncpy(statusCode,buffer,i);
         int status = atoi(statusCode);
-        // printf("%d\n",status);
+        printf("%d\n",status);
 
         // Tách luồng để xử lý 
         switch(status){
