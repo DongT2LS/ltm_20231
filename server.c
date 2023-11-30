@@ -33,9 +33,9 @@ extern struct Account *loginnedAccounts;
 
 // Xử lý request từ client
 void *handle_client(void *socket_fd) {
-    int client_socket = *((int *)socket_fd);
+    int client_socket = *(int *)socket_fd;
     char buffer[1024];
-    int read_size;
+    size_t read_size;
 
     // Xử lý các luồng cho các loại message 
     while ((read_size = recv(client_socket, buffer, sizeof(buffer), 0)) > 0) {
@@ -44,15 +44,16 @@ void *handle_client(void *socket_fd) {
         while(buffer[i]!=' '){
             i++;
         }
-        char *statusCode;
+        char *statusCode = malloc(5);
         strncpy(statusCode,buffer,i);
         int status = atoi(statusCode);
         printf("%d\n",status);
-
+        free(statusCode);
         // Tách luồng để xử lý 
         switch(status){
             case 0 :
-                leave();
+                signup(client_socket,buffer);
+                // createAccount("123","234","456");
                 break;
             case 1 :
                 login(client_socket,buffer);
@@ -96,7 +97,7 @@ void *handle_client(void *socket_fd) {
 
     // Close the socket and free the thread's socket file descriptor
     close(client_socket);
-    free(socket_fd);
+    // free(socket_fd);
     pthread_exit(NULL);
 }
 
@@ -106,6 +107,7 @@ int main(int argc,char *argv[]) {
     // login("3","Anh","123");
     // logout(1,"3");
     // displayList(loginnedAccounts);
+    accounts = getAccountFromFile();
     int server_socket, client_socket;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_len = sizeof(client_addr);
@@ -145,12 +147,8 @@ int main(int argc,char *argv[]) {
         }
         printf("Connection accepted: %d\n", client_socket);
 
-        // Tạo luồng mới để xử lý cho từng client
-        int *new_socket = malloc(1);
-        *new_socket = client_socket;
-
         // Tạo luồng mới
-        if (pthread_create(&thread_id, NULL, handle_client, (void *)new_socket) < 0) {
+        if (pthread_create(&thread_id, NULL, handle_client, &client_socket) < 0) {
             perror("Could not create thread");
             return 1;
         }

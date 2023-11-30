@@ -5,6 +5,9 @@
 
 #define FILENAME "database/account.txt"
 
+// Lấy số lượng tài khoản có trong database
+int numberaccounts = 0;
+
 // Thêm mới tài khoản vào danh sách account
 struct Account *addAccount(struct Account *head, const char *username, const char *password, const char *id)
 {
@@ -93,6 +96,8 @@ struct Account *getAccountFromFile()
 
     while (fscanf(file, "%s %s %s", id, username, password) == 3) // Nếu đọc đủ 3 trường của 1 account thì tiếp tục đọc
     {
+        // Đếm số lượng tài khoản 
+        numberaccounts++;
         // Khởi tạo 1 account mới
         struct Account *newAccount = (struct Account *)malloc(sizeof(struct Account));
         strcpy(newAccount->username, username);
@@ -140,10 +145,12 @@ void saveAccountToDatabase()
 }
 
 // Đăng ký tài khoản mới và lưu vào database và danh sách liên kết 
-void signin(char *id,char *username,char *password){
+void createAccount(char *id,char *username,char *password){
     accounts = addAccount(accounts,username,password,id);
     FILE *file = fopen(FILENAME,"a");
     fprintf(file,"%s %s %s\n",id,username,password);
     fclose(file);
 }
+
+// void findAccount
 

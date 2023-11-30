@@ -1,6 +1,7 @@
 #ifndef ACCOUNT_H 
 #define ACCOUNT_H
 
+int numberaccounts;
 struct Account {
     char username[50];
     char password[50];
@@ -20,6 +21,6 @@ void saveAccountToDatabase();
 
 void removeAccount(struct Account **head,const char *id);
 
-void signin(char *id,char *username,char *password);
+void createAccount(char *id,char *username,char *password);
 
 #endif
